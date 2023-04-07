@@ -7,7 +7,7 @@
     ],
     "routes": [
       {
-        "src": "/(.*)",
+        "src": "flaskblog/(.*)",
         "dest": "django_app_name/wsgi.py"
       }
     ]
