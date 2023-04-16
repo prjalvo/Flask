@@ -21,9 +21,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DEBUG = True
 
 
-urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
 ALLOWED_HOSTS = ['*']
 # Application definition
 
