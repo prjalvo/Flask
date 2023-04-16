@@ -20,9 +20,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
 
+urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
+ALLOWED_HOSTS = ['.vercel.app', '.now.sh']
 # Application definition
 
 INSTALLED_APPS = [
@@ -95,13 +97,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
-SECRET_KEY:'SJSJSJS#$%¨¨&KSKSDKSKSKSS098-+}{çlld'
-SQLALCHEMY_DATABASE_URI:'mysql://nodeuser:Matvdt68#@grupomultiplicargx.com.br/CBV'
-MAIL_SERVER:'smtp.gmail.com'
-MAIL_PORT:'25'
-MAIL_USE_TLS":'False'
-EMAIL_USER:'gxmultiplicar@gmail.com'
-EMAIL_PASS":'vjyqwdtvpvfcbqhf'
+SECRET_KEY = os.environ.get('SECRET_KEY')
+SQLALCHEMY_DATABASE_URI = os.environ.get('CLEARDB_DATABASE_URL')
+MAIL_SERVER = 'smtp.googlemail.com'
+MAIL_PORT = 587
+MAIL_USE_TLS = True
+MAIL_USERNAME = os.environ.get('EMAIL_USER')
+MAIL_PASSWORD = os.environ.get('EMAIL_PASS')  
