@@ -4,7 +4,7 @@ from flask import current_app
 from flaskblog import db, login_manager
 from flask_login import UserMixin
 from rest_framework.views import APIView
-
+from rest_framework import permissions
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -19,6 +19,9 @@ class User(db.Model, UserMixin,APIView):
     password = db.Column(db.String(60), nullable=False)
     posts = db.relationship('Post', backref='author', lazy=True)
 
+    permission_classes = (permissions.AllowAny,)
+    http_method_names = ['get', 'head']
+    
     def get_reset_token(self, expires_sec=1800):
         s = Serializer(current_app.config['SECRET_KEY'], expires_sec)
         return s.dumps({'user_id': self.id}).decode('utf-8')
