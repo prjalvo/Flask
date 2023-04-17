@@ -4,7 +4,7 @@ from flask import current_app
 from flaskblog import db, login_manager
 from flask_login import UserMixin
 from rest_framework.views import APIView
-from rest_framework.permissions import BasePermission, IsAuthenticated, SAFE_METHODS
+from rest_framework.permissions import AllowAny
 
 
 @login_manager.user_loader
@@ -24,7 +24,7 @@ class User(db.Model, UserMixin,APIView):
     posts = db.relationship('Post', backref='author', lazy=True)
 
     
-    permission_classes = [IsAuthenticated|ReadOnly]
+    permission_classes = [AllowAny] 
     
     def get_reset_token(self, expires_sec=1800):
         s = Serializer(current_app.config['SECRET_KEY'], expires_sec)
