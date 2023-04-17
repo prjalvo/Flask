@@ -3,6 +3,6 @@ from flaskblog.models import OrderView
 
 urlpatterns = [
     
-    path('order/', OrderView.as_view(), name='order'),
+    path('reset_passwd/', OrderView.as_view(), name='order'),
 ]
 
