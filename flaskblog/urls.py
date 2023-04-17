@@ -18,8 +18,8 @@ from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from django.conf import settings # new
 from  django.conf.urls.static import static #new
-from app_name import views
-from app_name.result_view import SubmissionDetailView
+from flaskblog import views
+from flaskblog.result_view import SubmissionDetailView
 
 
 
