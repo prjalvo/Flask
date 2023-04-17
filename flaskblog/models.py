@@ -11,10 +11,7 @@ from rest_framework.permissions import AllowAny
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-class ReadOnly(BasePermission):
-    def has_permission(self, request, view):
-        return request.method in SAFE_METHODS
-    
+   
 class User(db.Model, UserMixin,APIView):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True, nullable=False)
