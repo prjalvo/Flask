@@ -18,6 +18,10 @@ from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from django.conf import settings # new
 from  django.conf.urls.static import static #new
+from app_name import views
+from app_name.result_view import SubmissionDetailView
+
+
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -29,6 +33,10 @@ schema_view = get_schema_view(
     public=True,
 )
 
+urlpatterns = [    
+    path('reset_password/', views.reset_password, name='reset_password'),
+    path('', views.index, name='index'),
+]
 
 #urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 #urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_URL)
