@@ -1,5 +1,5 @@
 from django.urls import path
-from flaskblog.models import OrderView
+from flaskblog.__init__ import OrderView
 
 urlpatterns = [
     
