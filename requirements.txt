@@ -20,4 +20,4 @@ Werkzeug==0.14.1
 WTForms==2.1
 Django==4.2
 whitenoise==6.3.0
-drf_yasg=1.21.4
+drf-yasg=1.21.4
