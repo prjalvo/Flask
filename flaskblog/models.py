@@ -12,8 +12,7 @@ from rest_framework.permissions import IsAuthenticated
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-@api_view(['GET'])
-@permission_classes([IsAuthenticated])
+
 class User(db.Model, UserMixin,APIView):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True, nullable=False)
@@ -23,7 +22,8 @@ class User(db.Model, UserMixin,APIView):
     posts = db.relationship('Post', backref='author', lazy=True)
 
     
- 
+    @api_view(['GET'])
+    @permission_classes([IsAuthenticated])
     def get_reset_token(self, expires_sec=1800):
         s = Serializer(current_app.config['SECRET_KEY'], expires_sec)
         return s.dumps({'user_id': self.id}).decode('utf-8')
