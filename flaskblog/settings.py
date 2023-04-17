@@ -49,6 +49,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+WSGI_APPLICATION = 'flaskblog.wsgi.application'
 
 ALLOWED_HOSTS = ['*']
 # Application definition
