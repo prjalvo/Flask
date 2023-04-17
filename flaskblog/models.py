@@ -4,15 +4,17 @@ from flask import current_app
 from flaskblog import db, login_manager
 from flask_login import UserMixin
 from rest_framework.views import APIView
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import BasePermission, IsAuthenticated, SAFE_METHODS
 
 
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-
+class ReadOnly(BasePermission):
+    def has_permission(self, request, view):
+        return request.method in SAFE_METHODS
+    
 class User(db.Model, UserMixin,APIView):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True, nullable=False)
@@ -22,8 +24,8 @@ class User(db.Model, UserMixin,APIView):
     posts = db.relationship('Post', backref='author', lazy=True)
 
     
-    @api_view(['GET'])
-    @permission_classes([IsAuthenticated])
+    permission_classes = [IsAuthenticated|ReadOnly]
+    
     def get_reset_token(self, expires_sec=1800):
         s = Serializer(current_app.config['SECRET_KEY'], expires_sec)
         return s.dumps({'user_id': self.id}).decode('utf-8')
